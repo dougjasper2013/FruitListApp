@@ -11,14 +11,20 @@ struct FruitDetailView: View {
     let fruit: Fruit
     
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 15) {
             Text(fruit.name)
                 .font(.largeTitle)
                 .bold()
             
-            Text(fruit.description)
-                .font(.body)
-                .padding()
+            Text("Family: \(fruit.family)")
+            Text("Order: \(fruit.order)")
+            
+            if let nutrition = fruit.nutritions {
+                Text("Calories: \(nutrition.calories)")
+                Text("Carbs: \(nutrition.carbohydrates)g, Protein: \(nutrition.protein)g, Fat: \(nutrition.fat)g, Sugar: \(nutrition.sugar)g")
+                    .font(.subheadline)
+                    .multilineTextAlignment(.center)
+            }
             
             Spacer()
         }
@@ -27,7 +33,12 @@ struct FruitDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
     }
 }
+
 #Preview {
-    // Provide a real sample Fruit for preview
-        FruitDetailView(fruit: Fruit(name: "Apple", description: "A sweet red fruit that keeps the doctor away."))
+    FruitDetailView(fruit: Fruit(
+        name: "Apple",
+        family: "Rosaceae",
+        order: "Rosales",
+        nutritions: Nutrition(carbohydrates: 22, protein: 1, fat: 0.2, calories: 96, sugar: 17.2)
+    ))
 }

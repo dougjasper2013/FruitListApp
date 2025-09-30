@@ -7,17 +7,18 @@
 
 import Foundation
 
-struct Fruit: Identifiable, Hashable {
-    let id = UUID()
+struct Fruit: Identifiable, Hashable, Decodable {
+    let id = UUID()            // Local UUID
     let name: String
-    let description: String
+    let family: String
+    let order: String
+    let nutritions: Nutrition?
 }
 
-// sample data (unchanged)
-let sampleFruits: [Fruit] = [
-    Fruit(name: "Apple", description: "A sweet red fruit that keeps the doctor away."),
-    Fruit(name: "Banana", description: "A yellow fruit that is high in potassium."),
-    Fruit(name: "Orange", description: "A citrus fruit rich in vitamin C."),
-    Fruit(name: "Strawberry", description: "A small red fruit with seeds on the outside."),
-    Fruit(name: "Grapes", description: "Small juicy fruits that grow in bunches.")
-]
+struct Nutrition: Hashable, Decodable {
+    let carbohydrates: Double
+    let protein: Double
+    let fat: Double
+    let calories: Double
+    let sugar: Double
+}
